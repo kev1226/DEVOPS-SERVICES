@@ -1,0 +1,36 @@
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo_db
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  register-service:
+    build: ./register-service
+    container_name: register-service
+    restart: always
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/merndb
+      
+
+  token-service:
+    build: ./token-service
+    container_name: token-service
+    restart: always
+    ports:
+      - "4001:4001"
+    depends_on:
+      - register-service
+    environment:
+      - TOKEN_SECRET=uce2025
+
+volumes:
+  mongo_data:
