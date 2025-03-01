@@ -6,9 +6,14 @@ import cookieParser from 'cookie-parser';
 
 import authRoutes from './routes/auth.routes.js';
 
+import cors from 'cors'
+
 // Inicializar el objeto en app 
 const app = express();
 
+app.use(cors({
+    origin: 'http://localhost:5173'
+}))
 // app utiliza el módulo morgan
 app.use(morgan('dev'));
 // covertir los requesbosy en json
