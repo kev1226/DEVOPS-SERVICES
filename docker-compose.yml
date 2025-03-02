@@ -18,6 +18,17 @@ services:
       - mongo
     environment:
       - MONGODB_URI=mongodb://mongo:27017/merndb
+  
+  login-service:
+    build: ./login-service
+    container_name: login-service
+    restart: always
+    ports:
+      - "4002:4002"
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/merndb
       
 
   token-service:
