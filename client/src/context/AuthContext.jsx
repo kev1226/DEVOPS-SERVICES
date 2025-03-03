@@ -1,5 +1,6 @@
-import { createContext, useState,useContext} from "react";
-import { registeRequest } from '../api/auth';
+import { createContext, useState, useContext, useEffect } from "react";
+import { registeRequest, loginRequest } from '../api/auth';
+import { data } from "react-router-dom";
 
 export const AuthContext = createContext()
 
@@ -22,18 +23,40 @@ export const AuthProvider = ({ children }) => {
             console.log(res.data)
             setUser(res.data)
             setIsAuthenticated(true)
-            
         } catch (error) {
-            //console.log(error.response)
+            console.log(error.response)
             setErrors(error.response.data)
         }
     }
 
+    const signin = async (user) => {
+        try {
+            const res = await loginRequest(user)
+            console.log(res)
+
+        } catch (error) {
+            if (Array.isArray(error.response.data)){
+                return setErrors(error.response.data)
+            }
+            setErrors([error.response.data.message])
+                
+        }
+    }
+
+    useEffect(() => {
+        if (errors.length > 0) {
+            const timer = setTimeout(() => {
+                setErrors([])
+            }, 5000)
+            return () => clearTimeout(timer)
+        }
+    }, [errors])
 
 
     return (
         <AuthContext.Provider value={{
             signup,
+            signin,
             user,
             isAuthenticated,
             errors
