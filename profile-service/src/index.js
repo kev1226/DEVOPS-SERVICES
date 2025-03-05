@@ -1,8 +1,8 @@
 import app from "./app.js"
-import { connectDB } from "./db.js"
+import { connectDBLogin } from "./db.js"
 
 // Conexión a la base de datos
-connectDB();
+connectDBLogin();
 
 // servidor escuchando en
 app.listen(4003)

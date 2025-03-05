@@ -29,7 +29,19 @@ services:
       - mongo
     environment:
       - MONGODB_URI=mongodb://mongo:27017/merndb
-      
+  
+
+  profile-service:
+    build: ./profile-service
+    container_name: profile-service
+    restart: always
+    ports:
+      - "4003:4003"
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/merndb
+      - TOKEN_SECRET=uce2025
 
   token-service:
     build: ./token-service
