@@ -1,5 +1,5 @@
 function HomePage() {
-    return(
+    return (
         <div>Home Page</div>
     )
 }

@@ -12,7 +12,8 @@ const app = express();
 
 //permite que todos los dominios se puedan comunicar en este servidor
 app.use(cors({
-    origin: 'http://localhost:5173'
+    origin: 'http://localhost:5173',
+    credentials:true
 }))
 // app utiliza el módulo morgan
 app.use(morgan('dev'));
