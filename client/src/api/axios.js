@@ -9,3 +9,7 @@ export const axiosRegister = axios.create({
     baseURL: 'http://localhost:4000/api',
     withCredentials:true
 })
+export const axiosToken = axios.create({
+    baseURL: 'http://localhost:4001/api',
+    withCredentials:true
+})

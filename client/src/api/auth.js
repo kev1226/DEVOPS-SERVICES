@@ -1,7 +1,7 @@
-import {axiosLogin,axiosRegister} from './axios'
+import {axiosLogin,axiosRegister, axiosToken} from './axios'
 
 export const registeRequest = (user) => axiosRegister.post(`/register` , user);
 
 export const loginRequest = user => axiosLogin.post(`/login` , user);
 
-export const verifyTokenRequest = () => axiosLogin.get('/verify')
+export const verifyTokenRequest = () => axiosToken.get('/verify')
